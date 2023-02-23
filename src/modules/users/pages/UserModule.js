@@ -10,7 +10,7 @@ const UserModule = () => {
       <Route path="/">
         <UserPage />
       </Route>
-      <Route path="/:id">
+      <Route path="/id">
         <UserDetailsPage />
       </Route>
       <Route path="/add/" element={<UserCRDPage />} />

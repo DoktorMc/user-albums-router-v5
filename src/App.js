@@ -11,7 +11,7 @@ import NotFoundPage from "./modules/about/notFound/NotFoundPage";
 import Navigation from "./modules/common/commonComponents/navigation/Navigation";
 import "./App.css";
 import UserPage from "./modules/users/pages/userPage/UserPage";
-import UserModule from "./modules/users/pages/UserModule";
+import UserDetailsPage from "./modules/users/pages/userDetailsPage/UserDetailsPage";
 
 function App() {
   return (
@@ -19,16 +19,12 @@ function App() {
       <Router>
         <Navigation />
         <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/users">
-            {/* <UserPage /> */}
-            <UserModule/>
-          </Route>
-          <Route path="/albums">
-            <AlbumPage /> 
-          </Route>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/users/:id" component={UserDetailsPage} />
+          <Route path="/users" component={UserPage} />
+
+          <Route path="/albums" component={AlbumPage} />
+
           <Route path="/notfound">
             <NotFoundPage />
           </Route>
