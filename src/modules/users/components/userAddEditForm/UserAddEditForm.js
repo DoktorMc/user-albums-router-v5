@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Box, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink, useParams, withRouter } from "react-router-dom";
 import { setProperty } from "../../../../helper/setPropertyToNestedObj";
 
 import useCustomNavigate from "../../../../hooks/useCastomNavigate";
@@ -35,7 +35,9 @@ export const UserAddEditForm = ({
   userForUpdate,
   onAddUser,
   onUpdeteUser,
-  routerInfo,
+  match,
+  location,
+  history,
 }) => {
   const [user, setUser] = useState({
     name: "",
@@ -52,6 +54,8 @@ export const UserAddEditForm = ({
       name: "",
     },
   });
+  console.log("PARAMS", match);
+  let { id } = useParams(); 
 
   const [nameError, setNameError] = useState(true);
   const [userNameError, setUserNameError] = useState(true);
@@ -69,7 +73,7 @@ export const UserAddEditForm = ({
 
     //    console.log("user after", user);
     //  }
-    console.log("user eror imput", nameError);
+
     // setUser(extend(user, userForUpdate));
     if (nameError || userNameError || phoneNumberError || emailError) {
       setFormValid(false);
@@ -105,12 +109,12 @@ export const UserAddEditForm = ({
   };
 
   const onClickUpdate = (e) => {
-    console.log(" form id update");
-    console.log("user form", user);
     e.preventDefault();
-    onUpdeteUser(routerInfo.params.id, user);
+    onUpdeteUser(id, user);
     NavLink("/users");
   };
+
+
 
   return (
     <>
@@ -250,7 +254,7 @@ export const UserAddEditForm = ({
         </Box>
       </Box>
       <div className="form-button">
-        {routerInfo.params.id ? (
+        {id ? (
           <Button
             variant="contained"
             onClick={onClickUpdate}

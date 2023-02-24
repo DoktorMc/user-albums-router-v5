@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Box } from "@mui/system";
-import { useLocation, Link, NavLink } from "react-router-dom";
+import { useLocation, Link, useHistory, Route, Switch } from "react-router-dom";
 import { getAlbumsByid } from "../../../../store/actions/albumActions";
 import FolderIcon from "@mui/icons-material/Folder";
 import {
@@ -13,6 +13,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import UserCRDPage from "../../pages/userCRDPage/UserCRDPage";
 
 const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
   const { pathname } = useLocation();
@@ -21,8 +22,11 @@ const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
     getUserAlbums(userDetail.id);
   }, [userDetail.id]);
 
+  const history = useHistory();
+  console.log('PATH', pathname);
+  
   const onEditForm = () => {
-    NavLink(`${pathname}/edit`);
+    history.push(`${pathname}/edit`);
   };
 
   return (
@@ -36,19 +40,19 @@ const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
           <Typography sx={{ mb: 2, fontSize: 25 }}>
             {userDetail.name}
           </Typography>
-          <Typography>
-            <p>
+          <Typography sx={{ display: "flex", flexDirection: "column" }}>
+            <span>
               User name - <span>{userDetail.username}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               Phone - <span>{userDetail.phone}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               E-mail - <span> {userDetail.email}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               Website - <span> {userDetail.website}</span>
-            </p>
+            </span>
           </Typography>
         </Box>{" "}
         <Box
@@ -56,19 +60,19 @@ const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
           sx={{ mb: 2, p: 2, border: "1px dashed grey", maxWidth: 500 }}
         >
           <Typography sx={{ mb: 2, fontSize: 25 }}>Address</Typography>
-          <Typography>
-            <p>
+          <Typography sx={{ display: "flex", flexDirection: "column" }}>
+            <span>
               City - <span> {userDetail.address?.city}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               Street - <span> {userDetail.address?.street}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               Suite - <span> {userDetail.address?.suite}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               Zip-code - <span> {userDetail.address?.zipcode}</span>
-            </p>
+            </span>
           </Typography>
         </Box>
         <Box
@@ -76,16 +80,16 @@ const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
           sx={{ mb: 2, p: 2, border: "1px dashed grey", maxWidth: 500 }}
         >
           <Typography sx={{ mb: 2, fontSize: 25 }}>Company</Typography>
-          <Typography>
-            <p>
+          <Typography sx={{ display: "flex", flexDirection: "column" }}>
+            <span>
               Company name - <span> {userDetail.company?.name}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               BS - <span> {userDetail.company?.bs}</span>
-            </p>
-            <p>
+            </span>
+            <span>
               Catch phrase - <span> {userDetail.company?.catchPhrase}</span>
-            </p>
+            </span>
           </Typography>
         </Box>
         <Button
@@ -118,6 +122,9 @@ const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
         </Grid>
         {/* </Box> */}
       </Box>
+      <Switch>
+        <Route path={`${pathname}/:id/edit`} component={UserCRDPage} />
+      </Switch>
     </Box>
   );
 };

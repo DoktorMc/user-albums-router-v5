@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { deleteUser } from "../../../../store/actions/userActions";
 import UserItem from "../userItem/UserItem";
 import Paper from "@mui/material/Paper";
@@ -14,9 +14,10 @@ import { Button } from "@mui/material";
 
 const UsersList = ({ users }) => {
   const { pathname } = useLocation();
+  let history = useHistory();
 
   const onAddUser = () => {
-    NavLink(`${pathname}/add`);
+    history.push(`${pathname}/add`);
   };
 
   return (
@@ -57,8 +58,8 @@ const UsersList = ({ users }) => {
       <Button
         variant="contained"
         onClick={onAddUser}
-        sx={{ mt: 2, width: "20ch", fontSize: 15, fontWeight: 'bold'}}
-        color='secondary'
+        sx={{ mt: 2, width: "20ch", fontSize: 15, fontWeight: "bold" }}
+        color="secondary"
       >
         Add new user
       </Button>
