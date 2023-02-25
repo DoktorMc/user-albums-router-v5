@@ -23,16 +23,15 @@ function App() {
       <Router>
         <Navigation />
         <Switch>
-        
+          <Route exact path="/" component={HomePage} />
           <Route path="/users/add" component={UserCRDPage} />
-          {/* <Route path="/users/:id/edit" element={UserCRDPage} /> */}
-          <Route path="/users/:id/" component={UserDetailsPage} />
+          <Route path="/users/:id/edit" element={UserCRDPage} />
+          <Route path="/users/:id" component={UserDetailsPage} />
           <Route path="/users" component={UserPage} />
-          
+
           <Route path="/albums/:id" component={AlbumDetailsPage} />
           <Route path="/albums" component={AlbumPage} />
 
-          <Route exact path="/" component={HomePage} />{" "}
           <Route path="/notfound" component={NotFoundPage} />
           <Route
             path="*"

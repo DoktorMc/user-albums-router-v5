@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Box } from "@mui/system";
-import { useLocation, Link, useHistory, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  useLocation,
+  Link,
+  useHistory,
+  Route,
+  Switch,
+} from "react-router-dom";
 import { getAlbumsByid } from "../../../../store/actions/albumActions";
 import FolderIcon from "@mui/icons-material/Folder";
 import {
@@ -23,8 +30,8 @@ const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
   }, [userDetail.id]);
 
   const history = useHistory();
-  console.log('PATH', pathname);
-  
+  console.log("PATH", pathname);
+
   const onEditForm = () => {
     history.push(`${pathname}/edit`);
   };
@@ -122,9 +129,7 @@ const UserDetails = ({ userDetail, userAlbums, getUserAlbums }) => {
         </Grid>
         {/* </Box> */}
       </Box>
-      <Switch>
-        <Route path={`${pathname}/:id/edit`} component={UserCRDPage} />
-      </Switch>
+     
     </Box>
   );
 };
